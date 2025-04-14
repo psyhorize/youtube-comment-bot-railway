@@ -67,3 +67,4 @@ class YouTubeClient:
         )
         request.execute()
         self.commented_videos.add(video_id)
+
