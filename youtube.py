@@ -24,7 +24,7 @@ class YouTubeClient:
                     "token_uri": "https://oauth2.googleapis.com/token"
                 }
             }, scopes)
-            self.credentials = flow.run_console()
+            self.credentials = flow.run_local_server(port=8080)
             with open("token.pickle", "wb") as token:
                 pickle.dump(self.credentials, token)
 
