@@ -1,4 +1,3 @@
-
 import os
 import pickle
 import google_auth_oauthlib.flow
@@ -24,7 +23,13 @@ class YouTubeClient:
                     "token_uri": "https://oauth2.googleapis.com/token"
                 }
             }, scopes)
-            self.credentials = flow.run_local_server(port=8080)
+
+            auth_url, _ = flow.authorization_url(prompt='consent')
+            print(f"\n🔗 Otwórz ten link w przeglądarce i zaloguj się:\n{auth_url}")
+            code = input("✍️ Wklej kod autoryzacyjny tutaj: ")
+
+            self.credentials = flow.fetch_token(code=code)
+            self.credentials = flow.credentials  # <-- zapamiętaj dane
             with open("token.pickle", "wb") as token:
                 pickle.dump(self.credentials, token)
 
